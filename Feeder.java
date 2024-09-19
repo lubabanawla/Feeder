@@ -23,17 +23,14 @@ public class Feeder {
      */
     public void simulateOneDay(int numBirds)
     {
-        if (Math.random() < 0.95)
-        {
-            int foodPerBird = (int) (Math.random() * 41) + 10;
-            currentFood -= numBirds * foodPerBird;
-            if (currentFood < 10 || currentFood > 50);
-                currentFood = 0;
-        }
-        else
-        {
+    if (numBirds > 0) {
+        if (Math.random() < 0.95) {
+            int foodPerBird = (int) (Math.random() * 40) + 10;
+            currentFood = numBirds * foodPerBird;
+        } else { // precondition of simulate food >> than feeder??
             currentFood = 0;
         }
+    }
     }
 
     /**
@@ -41,9 +38,15 @@ public class Feeder {
      * feeder in this simulation, as described in part (b) Preconditions:
      * numBirds > 0, numDays > 0
      */
-    public int simulateManyDays(int numBirds, int numDays)
-    {
-
+    public int simulateManyDays(int numBirds, int numDays) {
+        if (numBirds > 0 && numDays > 0) {
+            simulateOneDay(numBirds);
+            while getCurrentFood() != 0{
+                if (getCurrentFood() = 0) {
+                    return 0;
+                }
+            }
+        }
     }
 
 }
