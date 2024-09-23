@@ -1,15 +1,16 @@
+import java.util.Random;
+
 public class Feeder {
 
-    public Feeder() {}
-    public Feeder(int c)
-    {
-        currentFood = c;
+    public Feeder(int initialFood) {
+        currentFood = initialFood;
     }
 
     /**
      * The amount of food, in grams, currently in the bird feeder; initialized
      * in the constructor and always greater than or equal to zero
      */
+
     private int currentFood;
 
     public int getCurrentFood()
@@ -21,16 +22,26 @@ public class Feeder {
      * Simulates one day with numBirds birds or possibly a bear at the bird
      * feeder, as described in part (a) Precondition: numBirds > 0
      */
+
     public void simulateOneDay(int numBirds)
     {
-    if (numBirds > 0) {
-        if (Math.random() < 0.95) {
-            int foodPerBird = (int) (Math.random() * 40) + 10;
-            currentFood = numBirds * foodPerBird;
-        } else { // precondition of simulate food >> than feeder??
-            currentFood = 0;
+        // reference https://www.geeksforgeeks.org/java-util-random-nextint-java/
+        // inspo from that one slide during class too
+     Random rand = new Random();
+
+     if (Math.random() < 0.95) {
+         int foodPerBird = rand.nextInt(41) + 10; // random food between 10 and 50
+         int totalFoodEaten = numBirds * foodPerBird;
+
+         if (totalFoodEaten > currentFood) { // precondition of simulate food >> than feeder??
+             currentFood = 0;
+         } else {
+             currentFood -= totalFoodEaten;
+         }
+
+     } else {
+         currentFood = 0;
         }
-    }
     }
 
     /**
@@ -38,15 +49,21 @@ public class Feeder {
      * feeder in this simulation, as described in part (b) Preconditions:
      * numBirds > 0, numDays > 0
      */
+
     public int simulateManyDays(int numBirds, int numDays) {
-        if (numBirds > 0 && numDays > 0) {
-            simulateOneDay(numBirds);
-            while getCurrentFood() != 0{
-                if (getCurrentFood() = 0) {
-                    return 0;
-                }
+        int dayswithfood = 0;
+
+        // reference https://www.w3schools.com/java/java_for_loop.asp
+        for (int i = 0; i < numDays; i++) {
+            if (currentFood > 0) {
+                simulateOneDay(numBirds);
+                dayswithfood++;
+            } else {
+                break;
             }
         }
+
+        return dayswithfood;
     }
 
 }
