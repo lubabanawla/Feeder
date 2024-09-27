@@ -40,9 +40,9 @@ public class Main {
         many_num_birds.add(5);
 
         List<Integer> many_num_days = new ArrayList<Integer>();
-        many_num_birds.add(4);
-        many_num_birds.add(5);
-        many_num_birds.add(10);
+        many_num_days.add(4);
+        many_num_days.add(5);
+        many_num_days.add(10);
 
         ArrayList<Feeder> many_feeders = new ArrayList<>();
 
